@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<bean
+		id = "serverinfosets"
+		class="com.geoq.dataassets.servicemonitor.componet.ServerInfoSets">
+		<property name="serverInfos">
+			<list>
+				<bean
+					class="com.geoq.dataassets.servicemonitor.componet.ServerInfo">
+					<property name="username" value = "siteadmin"></property>
+					<property name="password" value = "admin123"></property>
+					<property name="host" value = "192.168.1.87"></property>
+				</bean>
+			</list>
+		</property>
+		<property 
+			name="queryFilterInfo">
+			<bean 
+				class = "com.geoq.dataassets.servicemonitor.componet.LogQueryFilterInfo">
+				<property name="pageSize" value = "500"></property>
+				<property name="startDayFromNow" value = "7" ></property>
+				<property name="endDayFromNow" value = "0" ></property>
+				<property name="filter">
+					<value><![CDATA[{"services": "*", "codes":[100004,8521]}]]></value>
+				</property>
+			</bean>
+		</property>
+		<property name="logTimeTolerance" value = "1000"></property>
+	</bean>
+
+
+
+</beans>

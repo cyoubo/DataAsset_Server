@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN" monitorInterval="600">
+	<Appenders>
+		 <Console name="Console" target="SYSTEM_OUT">
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}]-[%p]-[%c:%L]-%M-%m%n"/>
+        </Console>
+        <!--
+        <RollingRandomAccessFile name="LogFile" fileName="${web:rootDir}/logs/error_detail.log" filePattern="${web:rootDir}/logs/$${date:yyyy-MM}/error-%d{yyyy-MM-dd HH-mm}-%i.log">
+			<ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}]-[%p]-[%c:%L]-%M-%m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingRandomAccessFile>
+		-->
+	</Appenders>
+	
+	<Loggers>
+        <Root level="trace">
+        <!--  
+        	<AppenderRef ref="LogFile" />
+        -->
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+	
+</Configuration>
