@@ -13,7 +13,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-	<bean
+<!-- 	<bean
 		id = "serverinfosets"
 		class="com.geoq.dataassets.servicemonitor.componet.ServerInfoSets">
 		<property name="serverInfos">
@@ -39,7 +39,7 @@
 			</bean>
 		</property>
 		<property name="logTimeTolerance" value = "1000"></property>
-	</bean>
+	</bean> -->
 
 
 
