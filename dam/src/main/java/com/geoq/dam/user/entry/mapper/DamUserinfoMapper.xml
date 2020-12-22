@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geoq.dam.user.entry.DamUserinfoMapper">
+  <resultMap id="BaseResultMap" type="com.geoq.dam.user.entry.DamUserinfo">
+    <constructor>
+      <idArg column="uuid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="roleid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="departmentuuid" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    uuid, name, password, roleid, departmentuuid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dam_userinfo
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <select id="travelAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dam_userinfo
+  </select>
+  <select id="selectByFilter" parameterType="com.geoq.dam.user.bean.UserFilterBean" resultMap="BaseResultMap"> 
+   select 
+    <include refid="Base_Column_List" />
+    from dam_userinfo
+    <where>
+    	<if test ="departmentids != null and departmentids.size()>0">
+    		departmentuuid in 
+    		<foreach collection = "departmentids" open="(" close=")" separator = "," item="duuid" index="index">
+    			#{duuid}
+    		</foreach>
+    	</if>
+    	<if test="roleids != null and roleids.size()>0">
+    		and roleid in
+    		<foreach collection = "roleids" open="(" close=")" separator = "," item="rid" index="index">
+    			#{rid}
+    		</foreach>
+    	</if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dam_userinfo
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.geoq.dam.user.entry.DamUserinfo">
+    insert into dam_userinfo (uuid, name, password, 
+      roleid, departmentuuid)
+    values (#{uuid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{roleid,jdbcType=VARCHAR}, #{departmentuuid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.geoq.dam.user.entry.DamUserinfo">
+    insert into dam_userinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="roleid != null">
+        roleid,
+      </if>
+      <if test="departmentuuid != null">
+        departmentuuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null">
+        #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentuuid != null">
+        #{departmentuuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.geoq.dam.user.entry.DamUserinfo">
+    update dam_userinfo
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null">
+        roleid = #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentuuid != null">
+        departmentuuid = #{departmentuuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.geoq.dam.user.entry.DamUserinfo">
+    update dam_userinfo
+    set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      roleid = #{roleid,jdbcType=VARCHAR},
+      departmentuuid = #{departmentuuid,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

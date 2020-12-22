@@ -1,25 +1,26 @@
 package com.geoq.dam.user.entry;
 
-public class DamUser {
-    private String uuid;
+public class DamUserinfo {
+	
+	private String uuid;
 
-    private String username;
+    private String name;
 
     private String password;
 
-    private String role;
+    private String roleid;
 
     private String departmentuuid;
 
-    public DamUser(String uuid, String username, String password, String role, String departmentuuid) {
+    public DamUserinfo(String uuid, String name, String password, String roleid, String departmentuuid) {
         this.uuid = uuid;
-        this.username = username;
+        this.name = name;
         this.password = password;
-        this.role = role;
+        this.roleid = roleid;
         this.departmentuuid = departmentuuid;
     }
 
-    public DamUser() {
+    public DamUserinfo() {
         super();
     }
 
@@ -28,15 +29,15 @@ public class DamUser {
     }
 
     public void setUuid(String uuid) {
-        this.uuid = uuid == null ? null : uuid.trim();
+        this.uuid = uuid;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     public String getPassword() {
@@ -47,12 +48,12 @@ public class DamUser {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleid() {
+        return roleid;
     }
 
-    public void setRole(String role) {
-        this.role = role == null ? null : role.trim();
+    public void setRoleid(String roleid) {
+        this.roleid = roleid == null ? null : roleid.trim();
     }
 
     public String getDepartmentuuid() {

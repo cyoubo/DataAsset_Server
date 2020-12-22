@@ -25,7 +25,11 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="pooldataSource"/>
         <property name="configLocation" value="classpath:mybatis-config.xml"></property>
-        <property name="mapperLocations" value="classpath:com/geoq/dam/*/*/mapper/*.xml"/>
+        <property name="mapperLocations">
+       		<list>
+                <value>classpath*:com/geoq/dam/**/mapper/*.xml</value>
+            </list>
+        </property>
     </bean>
  
  	<!-- mybatis session配置 -->
@@ -35,7 +39,7 @@
 	
 	<!-- mapper批量扫描包，从mapper包中扫描出mapper接口，自动创建代理对象并且在spring容器中注册 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-	    <property name="basePackage" value="com.geoq.dam" />
+	    <property name="basePackage" value="com.geoq.dam.user.entry" />
 	    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 	</bean>
 

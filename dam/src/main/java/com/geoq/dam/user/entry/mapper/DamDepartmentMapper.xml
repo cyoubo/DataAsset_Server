@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.geoq.ex.mybatis.bean.DamDepartmentMapper">
-  <resultMap id="BaseResultMap" type="com.geoq.ex.mybatis.bean.DamDepartment">
+<mapper namespace="com.geoq.dam.user.entry.DamDepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.geoq.dam.user.entry.DamDepartment">
     <constructor>
-      <arg column="uuid" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="departmentName" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <idArg column="uuid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="departmentname" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
-  <insert id="insert" parameterType="com.geoq.ex.mybatis.bean.DamDepartment">
-    insert into dam_department (uuid, departmentName)
+  <sql id="Base_Column_List">
+    uuid, departmentname
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dam_department
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <select id="travelAll" resultMap="BaseResultMap">
+  	select 
+    	<include refid="Base_Column_List" />
+    	from dam_department
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dam_department
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.geoq.dam.user.entry.DamDepartment">
+    insert into dam_department (uuid, departmentname)
     values (#{uuid,jdbcType=VARCHAR}, #{departmentname,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.geoq.ex.mybatis.bean.DamDepartment">
+  <insert id="insertSelective" parameterType="com.geoq.dam.user.entry.DamDepartment">
     insert into dam_department
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
         uuid,
       </if>
       <if test="departmentname != null">
-        departmentName,
+        departmentname,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -30,4 +51,18 @@
       </if>
     </trim>
   </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.geoq.dam.user.entry.DamDepartment">
+    update dam_department
+    <set>
+      <if test="departmentname != null">
+        departmentname = #{departmentname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.geoq.dam.user.entry.DamDepartment">
+    update dam_department
+    set departmentname = #{departmentname,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
 </mapper>
